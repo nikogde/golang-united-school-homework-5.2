@@ -24,11 +24,10 @@ func (c *Cache) Put(key, value string) {
 }
 
 func (c Cache) Keys() []string {
-	keys := make([]string, 0)
-	now := time.Now()
+	var keys []string
 
 	for key, value := range c.Key {
-		if !value.CanExpired || (value.CanExpired && now.After(value.Deadline)) {
+		if !value.CanExpired || (value.CanExpired && value.Deadline.After(time.Now())) {
 			keys = append(keys, key)
 		}
 	}
