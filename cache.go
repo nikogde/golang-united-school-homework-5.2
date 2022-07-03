@@ -16,7 +16,7 @@ func NewCache() Cache {
 	return Cache{Key: map[string]Dictionary{}}
 }
 
-func (c Cache) Put(key, value string) {
+func (c *Cache) Put(key, value string) {
 	c.Key[key] = Dictionary{
 		Value:      value,
 		CanExpired: false,
@@ -46,7 +46,7 @@ func (c Cache) Get(key string) (string, bool) {
 	return k, ok
 }
 
-func (c Cache) PutTill(key, value string, deadline time.Time) {
+func (c *Cache) PutTill(key, value string, deadline time.Time) {
 	c.Key[key] = Dictionary{
 		Value:      value,
 		Deadline:   deadline,
